@@ -55,12 +55,12 @@
 
 /* Cards Section */
 .banner-cards {
-  @apply flex justify-between flex-wrap gap-4 mt-16 mx-10;
+  @apply flex justify-between flex-wrap gap-0 mt-13 mx-10;
 }
 
 /* Individual Card */
 .banner-card {
-  @apply bg-white rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer w-[300px];
+  @apply bg-white rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer w-[320px];
 }
 
 /* Card Content */

@@ -631,9 +631,9 @@ const Header = () => {
           : "bg-white"
         }`}
     >
-      <div className="container mx-auto px-4 md:px-10 flex h-16 items-center justify-between   md:justify-center border-1 rounded-3xl gap-2.5 ">
+      <div className="container mx-auto px-4 md:px-10 flex h-16 items-center justify-between   md:justify-center  gap-2.5 ">
         {/* Left side: Home link + desktop navigation */}
-        <div className="flex items-center space-x-6 ">
+        <div className="flex items-center space-x-2 ">
           <GiStarShuriken className="text-primary size-4 me-2 hidden md:block" />
           <Link
             to="/"
