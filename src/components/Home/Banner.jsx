@@ -34,11 +34,7 @@ const Banner = () => {
           {/* <div className="banner-image">
              <img src={outercircle1} alt="outer" className="outer" /> 
             <div className="banner-inner">
-<<<<<<< HEAD
               <img src={innerganesh} alt="inner" />
-=======
-               <img src={innerremove} alt="inner" /> 
->>>>>>> a5cc0dba8fce58878666bf71b5ec1f0588961b6c
             </div>
 
 
