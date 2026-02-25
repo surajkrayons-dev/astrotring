@@ -71,14 +71,13 @@ const Banner = () => {
               <CardHeader className="flex items-center justify-between px-4 py-3">
                 <div className="flex items-center gap-3">
                   <span className="banner-card-icon chat">
-                    <IoIosChatbubbles className="h-4 w-4" />
+                    <IoIosChatbubbles className="h-7 w-9" />
                   </span>
                   <div>
                     <div className="font-medium">Chat To Astrologer</div>
-                    <div className="text-xs text-gray-500">Click here for</div>
-                    <div className="text-xs text-gray-500">
-                      connect instantly
-                    </div>
+                    <div className="text-xs text-gray-500">Get instant guidance from expert astrologers.
+                      Start your consultation now.</div>
+
                   </div>
                 </div>
                 <MoveRight className="banner-card-arrow hover:text-[#070707cc]" />
@@ -91,12 +90,12 @@ const Banner = () => {
               <CardHeader className="flex items-center justify-between px-4 py-3">
                 <div className="flex items-center gap-3">
                   <span className="banner-card-icon phone">
-                    <Phone className="h-4 w-4" />
+                    <Phone className="h-7 w-9" />
                   </span>
                   <div>
                     <div className="font-medium">Talk To Astrologer</div>
-                    <div className="text-xs text-gray-500">Click here for</div>
-                    <div className="text-xs text-gray-500">call now</div>
+                    <div className="text-xs text-gray-500">Connect directly with verified astrologers.
+                      Talk and get personalized insights.</div>
                   </div>
                 </div>
                 <MoveRight className="banner-card-arrow" />
