@@ -18,7 +18,7 @@ const items = [
     { title: "Update Profile", url: "/dashboard/update-astro", icon: Inbox },
     { title: "Wallet / Account", url: "/dashboard/wallet", icon: Wallet },
     { title: "Widhdrowl History", url: "/dashboard/widhdrow-history", icon: HistoryIcon },
-    { title: "Settings", url: "#", icon: Settings },
+    
 ];
 
 export function AppSidebar() {

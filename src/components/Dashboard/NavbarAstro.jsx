@@ -12,7 +12,9 @@ import {
     LogOut,
     MenuIcon,
     Settings,
-    User
+    User,
+    Home 
+   
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSidebar } from '../ui/sidebar';
@@ -124,8 +126,8 @@ console.log("user data",user)
 
                                 <DropdownMenuItem asChild>
                                     <Link to="/" className="flex items-center cursor-pointer">
-                                        <Settings className="mr-2 h-4 w-4" />
-                                        Back to Home
+                                        <Home className="mr-2 h-4 w-4" />
+                                        Back To Home
                                     </Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
