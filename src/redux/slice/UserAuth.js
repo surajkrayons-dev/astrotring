@@ -86,12 +86,12 @@ export const userProfile = createAsyncThunk(
     }
 );
 
-// ========== FORGOT PASSWORD FLOW FOR BOTH ASTRO/USER ==========
-export const forgotPasswordRequest = createAsyncThunk(
+// ========== FORGOT PASSWORD FLOW FOR USER ==========
+export const userForgotPasswordRequest = createAsyncThunk(
   "user/forgotPasswordRequest",
   async ({email,type}, thunkApi) => {
     try {
-      const res = await api.post("/astro/forgot-password", { email,type });
+      const res = await api.post(`/user/forgot-password`, { email,type });
       return res.data;
     } catch (error) {
       return thunkApi.rejectWithValue(
@@ -101,11 +101,11 @@ export const forgotPasswordRequest = createAsyncThunk(
   }
 );
 
-export const verifyOtp = createAsyncThunk(
+export const userVerifyOtp = createAsyncThunk(
   "user/verifyOtp",
   async ({ email, otp, type }, thunkApi) => {
     try {
-      const res = await api.post("/astro/verify-otp", { email, otp ,type});
+      const res = await api.post(`/user/verify-otp`, { email, otp ,type});
       return res.data;
     } catch (error) {
       return thunkApi.rejectWithValue(
@@ -115,11 +115,11 @@ export const verifyOtp = createAsyncThunk(
   }
 );
 
-export const resetPassword = createAsyncThunk(
+export const userResetPassword = createAsyncThunk(
   "user/resetPassword",
   async ({ email, password, password_confirmation, type}, thunkApi) => {
     try {
-      const res = await api.post("/astro/reset-password", { email, password, password_confirmation, type });
+      const res = await api.post(`/user/reset-password`, { email, password, password_confirmation, type });
       return res.data;
     } catch (error) {
       return thunkApi.rejectWithValue(

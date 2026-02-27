@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { forgotPasswordRequest, verifyOtp, resetPassword } from "@/redux/slice/UserAuth";
+
 import { toast } from "react-toastify";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { astroForgotPasswordRequest, astroResetPassword, astroVerifyOtp } from "@/redux/slice/AstroAuth";
 
 const ForgotPasswordAstro = () => {
   const [step, setStep] = useState(1); 
@@ -19,6 +20,11 @@ const ForgotPasswordAstro = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const userType = location.state.type
+  // console.log("location is ",location)
+  // console.log("location is type ",userType)
 
   const handleSendOtp = async (e) => {
     e.preventDefault();
@@ -28,7 +34,7 @@ const ForgotPasswordAstro = () => {
     }
     setLoading(true);
     try {
-      await dispatch(forgotPasswordRequest(email)).unwrap();
+      await dispatch(astroForgotPasswordRequest({email,type:userType})).unwrap();
       toast.success("OTP sent to your email");
       setStep(2);
       setErrors({});
@@ -47,7 +53,7 @@ const ForgotPasswordAstro = () => {
     }
     setLoading(true);
     try {
-      await dispatch(verifyOtp({ email, otp })).unwrap();
+      await dispatch(astroVerifyOtp({ email, otp,type:userType })).unwrap();
       toast.success("OTP verified");
       setStep(3);
       setErrors({});
@@ -70,7 +76,7 @@ const ForgotPasswordAstro = () => {
     }
     setLoading(true);
     try {
-      await dispatch(resetPassword({ email, password, password_confirmation: confirmPassword })).unwrap();
+      await dispatch(astroResetPassword({ email, password, password_confirmation: confirmPassword, type:userType })).unwrap();
       toast.success("Password reset successfully! Please login.");
       navigate("/astro-login"); 
     } catch (err) {

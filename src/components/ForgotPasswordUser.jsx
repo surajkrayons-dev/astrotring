@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { forgotPasswordRequest, verifyOtp, resetPassword } from "@/redux/slice/UserAuth";
+import { userForgotPasswordRequest, userVerifyOtp, userResetPassword } from "@/redux/slice/UserAuth";
 import { toast } from "react-toastify";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,7 @@ const ForgotPassword = ({ onSuccess, onCancel,userType}) => {
     }
     setLoading(true);
     try {
-      await dispatch(forgotPasswordRequest({email,type:userType})).unwrap();
+      await dispatch(userForgotPasswordRequest  ({email,type:userType})).unwrap();
       toast.success("OTP sent to your email");
       setStep(2);
       setErrors({});
@@ -48,7 +48,7 @@ const ForgotPassword = ({ onSuccess, onCancel,userType}) => {
     }
     setLoading(true);
     try {
-      await dispatch(verifyOtp({ email, otp ,type:userType})).unwrap();
+      await dispatch(userVerifyOtp({ email, otp ,type:userType})).unwrap();
       toast.success("OTP verified");
       setStep(3);
       setErrors({});
@@ -71,7 +71,7 @@ const ForgotPassword = ({ onSuccess, onCancel,userType}) => {
     }
     setLoading(true);
     try {
-      await dispatch(resetPassword({
+      await dispatch(userResetPassword({
         email,
         type:userType,
         password,

@@ -101,7 +101,7 @@ const AstroLogin = () => {
                         <div className="text-right cursor-pointer">
                 <span
                   onClick={() => {
-                    navigate('/forgot-password-astro');
+                    navigate('/forgot-password-astro',{ state: { type: 'astro' } });
                   }}
                   className="text-orange-600 text-sm hover:underline"
                 >
