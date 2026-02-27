@@ -1,79 +1,24 @@
-import { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { MoveRight, Phone, ShoppingBag } from "lucide-react";
 import { IoIosChatbubbles } from "react-icons/io";
 import { Link } from "react-router-dom";
 
-import outercircle1 from "@/assets/outercircle1.png";
-import innerganesh from "@/assets/innerganesh.png";
-// import bannerVideo from "@/assets/bannerVideo.mp4"
+import outercircle1 from "@/assets/outercircle1.png"
+import innerganesh from "@/assets/innerganesh.png"
+import bannerVideo from "@/assets/bannerVideo.mp4"
 
 const Banner = () => {
-  const [banners, setBanners] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    fetch("https://astro.astrotring.com/api/banners?type=astro")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.success && data?.data?.length > 0) {
-          const sorted = [...data.data].sort(
-            (a, b) => a.sort_order - b.sort_order,
-          );
-          setBanners(sorted);
-        }
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
-  useEffect(() => {
-    if (banners.length === 0) return;
-
-    const currentItem = banners[currentIndex];
-
-    if (currentItem?.media_type === "image") {
-      const timer = setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % banners.length);
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [currentIndex, banners]);
-
   return (
     <section className="py-0 from-orange-50 via-yellow-100 to-red-100">
-      <div className="w-full h-full mx-auto overflow-hidden border-8 border-white">
-        {banners.length > 0 && (
-          <div
-            className="flex h-full transition-transform duration-700 ease-in-out"
-            style={{
-              transform: `translateX(-${currentIndex * 100}%)`,
-            }}
-          >
-            {banners.map((item) => (
-              <div key={item.id} className="w-full h-full flex-shrink-0">
-                {item.media_type === "video" ? (
-                  <video
-                    src={item.media_url}
-                    autoPlay
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover"
-                    onEnded={() =>
-                      setCurrentIndex((prev) => (prev + 1) % banners.length)
-                    }
-                  />
-                ) : (
-                  <img
-                    src={item.media_url}
-                    alt="banner"
-                    className="w-full h-full object-cover"
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-        )}
+      <div className=" w-full h-full mx-auto overflow-hidden  border-8 border-white">
+        <video
+          src={bannerVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        />
       </div>
       <div className="container">
         {/* Top Section */}
@@ -178,39 +123,43 @@ const Banner = () => {
           </Card>
         </div> */}
 
+
+
+
         <div className="flex flex-wrap justify-center gap-16 m-6">
+
           {/* Chat Card */}
           <Card className="relative w-[280px]  border-0 font-medium text-whit group">
+
             {/* Animated Background Layers */}
-            <span
-              className="absolute inset-0 w-full h-full 
+            <span className="absolute inset-0 w-full h-full 
                    transition-all duration-500 ease-out
                    transform -skew-x-12
                    bg-gradient-to-r 
                    from-[#FFD54F] via-[#FFB300] to-[#F57C00]
-                   group-hover:skew-x-12"
-            ></span>
+                   group-hover:skew-x-12">
+            </span>
 
             {/* Gradient Layer 2 (Deep Saffron Blend) */}
-            <span
-              className="absolute inset-0 w-full h-full 
+            <span className="absolute inset-0 w-full h-full 
                    transition-all duration-500 ease-out
                    transform skew-x-12
                    bg-gradient-to-r 
                    from-[#FFF176] via-[#f9ce86] to-[#ffdbc7]
                    opacity-90
-                   group-hover:-skew-x-12"
-            ></span>
+                   group-hover:-skew-x-12">
+            </span>
 
             <Link to="/talk-to-astrologer" className="relative z-10 block">
+            
+
               <CardHeader className="flex items-center justify-between px-6 py-5">
+
                 <div className="flex items-center gap-3">
-                  <span
-                    className="flex items-center justify-center w-10 h-10 
+                  <span className="flex items-center justify-center w-10 h-10 
                          rounded-full bg-white/20 backdrop-blur-md
                          transition-all duration-300 
-                         group-hover:scale-110"
-                  >
+                         group-hover:scale-110">
                     <IoIosChatbubbles className="h-5 w-5" />
                   </span>
 
@@ -218,89 +167,88 @@ const Banner = () => {
                     <div className="font-semibold text-lg tracking-wide">
                       Chat
                     </div>
-                    <div className="text-xs opacity-90">Connect instantly</div>
+                    <div className="text-xs opacity-90">
+                    Connect instantly
+                    </div>
                   </div>
                 </div>
 
-                <MoveRight
-                  className="transition-all duration-300 
-                           group-hover:translate-x-3"
-                />
+                <MoveRight className="transition-all duration-300 
+                           group-hover:translate-x-3" />
               </CardHeader>
             </Link>
           </Card>
 
+
           {/* Talk Card */}
           <Card className="relative  w-[280px] border-0 font-medium text-whit group">
-            <span
-              className="absolute inset-0 w-full h-full 
+
+            <span className="absolute inset-0 w-full h-full 
                    transition-all duration-500 ease-out
                    transform -skew-x-12
                    bg-gradient-to-r 
                    from-[#FFD54F] via-[#FFB300] to-[#F57C00]
-                   group-hover:skew-x-12"
-            ></span>
+                   group-hover:skew-x-12">
+            </span>
 
             {/* Gradient Layer 2 (Deep Saffron Blend) */}
-            <span
-              className="absolute inset-0 w-full h-full 
+            <span className="absolute inset-0 w-full h-full 
                    transition-all duration-500 ease-out
                    transform skew-x-12
                    bg-gradient-to-r 
                    from-[#FFF176] via-[#f9ce86] to-[#ffdbc7]
                    opacity-90
-                   group-hover:-skew-x-12"
-            ></span>
+                   group-hover:-skew-x-12">
+            </span>
 
             <Link to="/talk-to-astrologer" className="relative z-10 block">
               <CardHeader className="flex items-center justify-between px-6 py-5">
+
                 <div className="flex items-center gap-3">
-                  <span
-                    className="flex items-center justify-center w-10 h-10 
+                  <span className="flex items-center justify-center w-10 h-10 
                          rounded-full bg-white/20 backdrop-blur-md
                          transition-all duration-300 
-                         group-hover:scale-110"
-                  >
-                    <Phone className="h-5 w-5" />
+                         group-hover:scale-110">
+                     <Phone className="h-5 w-5" />
                   </span>
 
                   <div>
                     <div className="font-semibold text-lg tracking-wide">
                       Talk
                     </div>
-                    <div className="text-xs opacity-90">Call Now</div>
+                    <div className="text-xs opacity-90">
+                      Call Now
+                    </div>
                   </div>
                 </div>
 
-                <MoveRight
-                  className="transition-all duration-300 
-                           group-hover:translate-x-3"
-                />
+                <MoveRight className="transition-all duration-300 
+                           group-hover:translate-x-3" />
               </CardHeader>
             </Link>
           </Card>
 
+
           {/* Store Card */}
           <Card className="relative  w-[280px] border-0 font-medium  group">
-            <span
-              className="absolute inset-0 w-full h-full 
+
+            <span className="absolute inset-0 w-full h-full 
                    transition-all duration-500 ease-out
                    transform -skew-x-12
                    bg-gradient-to-r 
                    from-[#FFD54F] via-[#FFB300] to-[#F57C00]
-                   group-hover:skew-x-12"
-            ></span>
+                   group-hover:skew-x-12">
+            </span>
 
             {/* Gradient Layer 2 (Deep Saffron Blend) */}
-            <span
-              className="absolute inset-0 w-full h-full 
+            <span className="absolute inset-0 w-full h-full 
                    transition-all duration-500 ease-out
                    transform skew-x-12
                    bg-gradient-to-r 
                    from-[#FFF176] via-[#f9ce86] to-[#ffdbc7]
                    opacity-90
-                   group-hover:-skew-x-12"
-            ></span>
+                   group-hover:-skew-x-12">
+            </span>
 
             <Link
               to="https://store.adkrayons.com/product"
@@ -308,13 +256,12 @@ const Banner = () => {
               className="relative z-10 block"
             >
               <CardHeader className="flex items-center justify-between px-6 py-5">
+
                 <div className="flex items-center gap-3">
-                  <span
-                    className="flex items-center justify-center w-10 h-10 
+                  <span className="flex items-center justify-center w-10 h-10 
                          rounded-full bg-white/20 backdrop-blur-md
                          transition-all duration-300 
-                         group-hover:scale-110"
-                  >
+                         group-hover:scale-110">
                     <ShoppingBag className="h-5 w-5" />
                   </span>
 
@@ -322,18 +269,21 @@ const Banner = () => {
                     <div className="font-semibold text-lg tracking-wide">
                       Store
                     </div>
-                    <div className="text-xs opacity-90">Shop products</div>
+                    <div className="text-xs opacity-90">
+                      Shop products
+                    </div>
                   </div>
                 </div>
 
-                <MoveRight
-                  className="transition-all duration-300 
-                           group-hover:translate-x-3"
-                />
+                <MoveRight className="transition-all duration-300 
+                           group-hover:translate-x-3" />
               </CardHeader>
             </Link>
+
           </Card>
+
         </div>
+
       </div>
     </section>
   );
