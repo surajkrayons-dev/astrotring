@@ -115,7 +115,7 @@ function UpdateAstro() {
     }
   };
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({ 
     name: '',
     username: '',
     email: '',
