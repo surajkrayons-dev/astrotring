@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import Layout from './layout/Layout';
+import Layout from "./layout/Layout";
 
 // import Astrodetails from './pages/AstrologerDetails'
 import { lazy, Suspense, useEffect, useState } from "react";
@@ -17,9 +17,8 @@ import BhumiPuja from "./pages/FooterMahurat/BhumiPuja";
 import GrihaPravesh from "./pages/FooterMahurat/GrihaPravesh";
 import Mundan from "./pages/FooterMahurat/Mundan";
 import MonthlyHoroscope from "./pages/horoscopesMonthlyAndYearly/MonthlyHoroscope";
+import YearlyHoroscope from "./pages/horoscopesMonthlyAndYearly/YearlyHoroscope";
 // import { ForgotPasswordAstro } from "./components/ForgotPassword";
-
-
 
 // import BlogPage from "./pages/BlogPage";
 
@@ -32,12 +31,15 @@ const CallwithAstro = lazy(() => import("./pages/callwithAstro/callwithAstro"));
 const AstrologerDetails = lazy(() => import("./pages/AstrologerDetails"));
 const AstroLogin = lazy(() => import("./components/AstroLogin"));
 const AstroRegister = lazy(() => import("./components/AstroRegistration"));
-const HoroscopeDetails = lazy(() => import("./components/Horoscopes/HoroscopeDetails"));
+const HoroscopeDetails = lazy(
+  () => import("./components/Horoscopes/HoroscopeDetails"),
+);
 const Horoscopes = lazy(() => import("./pages/Horoscopes"));
 const UpdateUser = lazy(() => import("./components/Home/UpdateUser"));
 const ForgotPassword = lazy(() => import("./components/ForgotPasswordUser"));
-const ForgotPasswordAstro = lazy(() => import("./components/ForgotPasswordAstro"));
-
+const ForgotPasswordAstro = lazy(
+  () => import("./components/ForgotPasswordAstro"),
+);
 
 const Dashboard = lazy(() => import("./pages/AstroDashboard/Dashboard"));
 const UpdateAstro = lazy(() => import("./pages/AstroDashboard/UpdateAstro"));
@@ -75,8 +77,7 @@ const App = () => {
 
   const fatchAstrologers = async () => {
     await dispatch(GetAllAstrologer()).unwrap();
-  }
-
+  };
 
   useEffect(() => {
     fatchAstrologers();
@@ -90,8 +91,11 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/free-kundli" element={<FreeKundli />} />
             <Route path="/update-user" element={<UpdateUser />} />
-            <Route path='/forgot-password' element={<ForgotPassword />} />
-            <Route path='/forgot-password-astro' element={<ForgotPasswordAstro />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route
+              path="/forgot-password-astro"
+              element={<ForgotPasswordAstro />}
+            />
             {/* <Route path='/chat-with-astrologer' element={<ChatWithAstro />} /> */}
             <Route path="/talk-to-astrologer" element={<CallwithAstro />} />
             <Route path="/astro-details/:id" element={<Astrodetails />} />
@@ -99,16 +103,13 @@ const App = () => {
             <Route
               path="/horoscopes/:time/:horos"
               element={<HoroscopeDetails />}
-              
             />
 
-{/* horocopes data monthly and yearly */}
-<Route path="/monthly/:zodiac?" element={<MonthlyHoroscope />} />
-<Route path="/monthly" element={<MonthlyHoroscope />} />
-
-
-
-
+            {/* horocopes data monthly and yearly */}
+            <Route path="/monthly/:zodiac?" element={<MonthlyHoroscope />} />
+            <Route path="/monthly" element={<MonthlyHoroscope />} />
+            <Route path="/yearly/:zodiac?" element={<YearlyHoroscope />} />
+            <Route path="/yearly" element={<YearlyHoroscope />} />
 
             <Route path="/astro-login" element={<AstroLogin />} />
             <Route path="/astro-register" element={<AstroRegister />} />
@@ -123,27 +124,21 @@ const App = () => {
             <Route path="/bhumiPuja-muhurat" element={<BhumiPuja />} />
             <Route path="/griha-pravesh-muhurat" element={<GrihaPravesh />} />
             <Route path="/mundan-muhurat" element={<Mundan />} />
-
-
-
-
           </Route>
-
-
 
           <Route path="/dashboard" element={<AstroLayout />}>
             <Route path="/dashboard/profile" element={<Dashboard />} />
             <Route path="/dashboard/update-astro" element={<UpdateAstro />} />
             <Route path="/dashboard/wallet" element={<Wallet />} />
-            <Route path="/dashboard/widhdrow-history" element={<WidhdrowHistory />} />
+            <Route
+              path="/dashboard/widhdrow-history"
+              element={<WidhdrowHistory />}
+            />
           </Route>
-
-
-
         </Routes>
       </Suspense>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
