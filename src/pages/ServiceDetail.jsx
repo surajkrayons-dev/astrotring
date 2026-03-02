@@ -57,32 +57,76 @@ const ServiceDetail = () => {
     //     </div>
     //   </div>
     // </section>
-    <section className="bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 py-16">
-      <div className="max-w-7xl mx-auto px-6">
+    // <section className="bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 py-16">
+    //   <div className="max-w-7xl mx-auto px-6">
+    //     {/* Hero */}
+    //     <div className="text-center mb-12">
+    //       <h1 className="text-4xl md:text-5xl font-bold mb-4">
+    //         {slug.replaceAll("-", " ").toUpperCase()}
+    //       </h1>
+    //       <div className="w-24 h-1 bg-yellow-500 mx-auto rounded-full"></div>
+    //     </div>
+
+    //     {/* 2 Column Layout */}
+    //     <div className="grid lg:grid-cols-3 gap-10">
+    //       {/* LEFT SIDE – Markdown Content */}
+    //       <div className="lg:col-span-2">
+    //         <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
+    //           <article
+    //             className="
+    //             prose prose-lg max-w-none
+    //             prose-headings:text-gray-900
+    //             prose-h1:text-3xl
+    //             prose-h2:text-2xl
+    //             prose-h3:text-xl
+    //             prose-p:text-gray-700
+    //             prose-strong:text-yellow-600
+    //             prose-ul:pl-6
+    //           "
+    //           >
+    //             <ReactMarkdown
+    //               remarkPlugins={[remarkGfm]}
+    //               rehypePlugins={[rehypeRaw]}
+    //             >
+    //               {content}
+    //             </ReactMarkdown>
+    //           </article>
+    //         </div>
+    //       </div>
+
+    //       {/* RIGHT SIDE – Related Services */}
+    //       <div className="space-y-6">
+    //         <RelatedDosh currentSlug={slug} />
+    //       </div>
+    //     </div>
+    //   </div>
+    // </section>
+    <section className="bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 py-12 md:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+        <div className="text-center mb-10 md:mb-14">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             {slug.replaceAll("-", " ").toUpperCase()}
           </h1>
-          <div className="w-24 h-1 bg-yellow-500 mx-auto rounded-full"></div>
+          <div className="w-20 md:w-24 h-1 bg-yellow-500 mx-auto rounded-full"></div>
         </div>
 
-        {/* 2 Column Layout */}
-        <div className="grid lg:grid-cols-3 gap-10">
-          {/* LEFT SIDE – Markdown Content */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
+        {/* Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* LEFT: Markdown Content */}
+          <div className="lg:col-span-8">
+            <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 md:p-10">
               <article
                 className="
-                prose prose-lg max-w-none
-                prose-headings:text-gray-900
-                prose-h1:text-3xl
-                prose-h2:text-2xl
-                prose-h3:text-xl
-                prose-p:text-gray-700
-                prose-strong:text-yellow-600
-                prose-ul:pl-6
-              "
+              prose prose-base md:prose-lg max-w-none
+              prose-headings:text-gray-900
+              prose-h1:text-2xl md:prose-h1:text-3xl
+              prose-h2:text-xl md:prose-h2:text-2xl
+              prose-h3:text-lg md:prose-h3:text-xl
+              prose-p:text-gray-700
+              prose-strong:text-yellow-600
+              prose-ul:pl-5
+            "
               >
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
@@ -94,9 +138,9 @@ const ServiceDetail = () => {
             </div>
           </div>
 
-          {/* RIGHT SIDE – Related Services */}
-          <div className="space-y-6">
-            <RelatedDosh currentSlug={slug} />
+          {/* RIGHT: Related Sidebar */}
+          <div className="lg:col-span-4">
+            <RelatedDosh />
           </div>
         </div>
       </div>
