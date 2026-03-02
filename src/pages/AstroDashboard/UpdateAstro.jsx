@@ -14,7 +14,10 @@ import { AstrologerProfile, AstrologerUpdate } from '@/redux/slice/AstroAuth';
 import { userProfile, userUpdate } from '@/redux/slice/UserAuth';
 
 // Move FormField component OUTSIDE
-const FormField = ({ label, name, type = 'text', placeholder, icon: Icon, required = false, className = '', value, onChange }) => (
+const FormField = ({ label, name, type="text", placeholder, icon: Icon, required = false, className = '', value, onChange }) => {
+  // console.log("type",type)
+  // console.log("value",type)
+  return(
   <div className="space-y-2">
     <Label htmlFor={name} className="flex items-center gap-2 text-sm font-medium text-slate-700">
       {Icon && <Icon className="w-4 h-4 text-slate-500" />}
@@ -26,13 +29,13 @@ const FormField = ({ label, name, type = 'text', placeholder, icon: Icon, requir
       name={name}
       type={type}
       placeholder={placeholder}
-      value={type !== "date" ? value : new Date().toISOString().split("T")[0]}
+      value={type !== "date" ? value : value?.split("T")[0]}
       onChange={onChange}
       lang="en-GB"
       className={cn("border-slate-200 focus:border-indigo-400 focus:ring-indigo-200", className)}
     />
   </div>
-);
+)};
 
 // Move MultiSelect component OUTSIDE with maxSelection limit
 const MultiSelect = ({ options, selected, setSelected, label, icon: Icon, maxSelection = null }) => {
@@ -98,6 +101,7 @@ function UpdateAstro() {
 
   const { astrologer, loading: astroLoading } = useSelector((state) => state.astroAuth);
   const { user, loading: userLoading } = useSelector((state) => state.userAuth);
+  
   const [role, setRole] = useState(localStorage.getItem("role_id"));
   const dispatch = useDispatch();
   const [profileFile, setProfileFile] = useState(null);
@@ -111,7 +115,7 @@ function UpdateAstro() {
     }
   };
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({ 
     name: '',
     username: '',
     email: '',
@@ -141,6 +145,7 @@ function UpdateAstro() {
   const isAstrologer = role === "2";
   const currentProfile = isAstrologer ? astrologer : user;
   const loading = isAstrologer ? astroLoading : userLoading;
+  console.log("current profile",currentProfile)
 
   useEffect(() => {
     if (currentProfile) {
@@ -323,7 +328,7 @@ function UpdateAstro() {
                 Personal
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 mb-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <FormField
                   label="Full Name"
@@ -397,7 +402,7 @@ function UpdateAstro() {
                 Contact Information
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 mb-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
                   label="Email"
@@ -497,6 +502,14 @@ function UpdateAstro() {
                   icon={Globe}
                   maxSelection={3}
                 />
+                <MultiSelect
+                  options={categoryOptions}
+                  selected={selectedCategories}
+                  setSelected={setSelectedCategories}
+                  label="Consultation Categories"
+                  icon={Globe}
+                  maxSelection={3}
+                />
               </CardContent>
             </Card>
           )}
@@ -509,7 +522,7 @@ function UpdateAstro() {
               </CardTitle>
             </CardHeader>
             <CardContent className="">
-              <div className="space-y-2">
+              <div className="space-y-2 mb-4">
                 <Label htmlFor="about" className="text-sm font-medium text-slate-700">
                   {isAstrologer ? 'Professional Bio & Approach' : 'About Yourself'}
                   <p className="text-xs text-slate-500 italic">
