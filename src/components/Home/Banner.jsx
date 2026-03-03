@@ -1,3 +1,6 @@
+
+
+
 import { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { MoveRight, Phone, ShoppingBag } from "lucide-react";

@@ -16,8 +16,7 @@ import Marriage from "./pages/FooterMahurat/Marriage";
 import BhumiPuja from "./pages/FooterMahurat/BhumiPuja";
 import GrihaPravesh from "./pages/FooterMahurat/GrihaPravesh";
 import Mundan from "./pages/FooterMahurat/Mundan";
-import MonthlyHoroscope from "./pages/horoscopesMonthlyAndYearly/MonthlyHoroscope";
-// import { ForgotPasswordAstro } from "./components/ForgotPassword";
+
 
 
 
@@ -34,9 +33,14 @@ const AstroLogin = lazy(() => import("./components/AstroLogin"));
 const AstroRegister = lazy(() => import("./components/AstroRegistration"));
 const HoroscopeDetails = lazy(() => import("./components/Horoscopes/HoroscopeDetails"));
 const Horoscopes = lazy(() => import("./pages/Horoscopes"));
+const StaticHoroscopesMonthlyAndYearly = lazy(() => 
+  import("./pages/staticHoroscopesMonthlyAndYearly/StaticHoroscopesMonthlyAndYearly")
+);
 const UpdateUser = lazy(() => import("./components/Home/UpdateUser"));
 const ForgotPassword = lazy(() => import("./components/ForgotPasswordUser"));
 const ForgotPasswordAstro = lazy(() => import("./components/ForgotPasswordAstro"));
+
+
 
 
 const Dashboard = lazy(() => import("./pages/AstroDashboard/Dashboard"));
@@ -69,9 +73,15 @@ const App = () => {
     }
   }, [dispatch, role, astrologer, user]);
 
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [path]);
   useEffect(() => {
+  
+  if (!path.includes("/staticHoroschopes/") && !path.includes("/services")) {
     window.scrollTo(0, 0);
-  }, [path]);
+  }
+}, [path]);
 
   const fatchAstrologers = async () => {
     await dispatch(GetAllAstrologer()).unwrap();
@@ -102,9 +112,9 @@ const App = () => {
               
             />
 
-{/* horocopes data monthly and yearly */}
-<Route path="/monthly/:zodiac?" element={<MonthlyHoroscope />} />
-<Route path="/monthly" element={<MonthlyHoroscope />} />
+
+
+<Route path="/staticHoroschopes/:timePeriod/:zodiac?" element={<StaticHoroscopesMonthlyAndYearly />} />
 
 
 
@@ -114,7 +124,7 @@ const App = () => {
             <Route path="/astro-register" element={<AstroRegister />} />
             <Route path="/blogs" element={<Blog />} />
             <Route path="/blogs/:id" element={<BlogDetails />} />
-            <Route path="/services/:slug" element={<ServiceDetail />} />
+            <Route path="/services/:slug?" element={<ServiceDetail />} />
 
             <Route path="/annanprashan-muhurat" element={<Annanprashan />} />
             <Route path="/aamkaran-muhurat" element={<Namkaran />} />
