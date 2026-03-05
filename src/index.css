@@ -371,3 +371,16 @@ select {
   animation: spin-slow 6s linear infinite;
 }
 
+
+
+/* for hide scroll bar  */
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;     
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;            
+  }
+}

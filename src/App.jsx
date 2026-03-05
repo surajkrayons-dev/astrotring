@@ -16,9 +16,7 @@ import Marriage from "./pages/FooterMahurat/Marriage";
 import BhumiPuja from "./pages/FooterMahurat/BhumiPuja";
 import GrihaPravesh from "./pages/FooterMahurat/GrihaPravesh";
 import Mundan from "./pages/FooterMahurat/Mundan";
-import MonthlyHoroscope from "./pages/horoscopesMonthlyAndYearly/MonthlyHoroscope";
-import YearlyHoroscope from "./pages/horoscopesMonthlyAndYearly/YearlyHoroscope";
-// import { ForgotPasswordAstro } from "./components/ForgotPassword";
+
 
 // import BlogPage from "./pages/BlogPage";
 
@@ -35,11 +33,16 @@ const HoroscopeDetails = lazy(
   () => import("./components/Horoscopes/HoroscopeDetails"),
 );
 const Horoscopes = lazy(() => import("./pages/Horoscopes"));
+const StaticHoroscopesMonthlyAndYearly = lazy(() =>
+  import("./pages/staticHoroscopesMonthlyAndYearly/StaticHoroscopesMonthlyAndYearly")
+);
 const UpdateUser = lazy(() => import("./components/Home/UpdateUser"));
 const ForgotPassword = lazy(() => import("./components/ForgotPasswordUser"));
 const ForgotPasswordAstro = lazy(
   () => import("./components/ForgotPasswordAstro"),
 );
+
+
 
 const Dashboard = lazy(() => import("./pages/AstroDashboard/Dashboard"));
 const UpdateAstro = lazy(() => import("./pages/AstroDashboard/UpdateAstro"));
@@ -71,8 +74,14 @@ const App = () => {
     }
   }, [dispatch, role, astrologer, user]);
 
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [path]);
   useEffect(() => {
-    window.scrollTo(0, 0);
+
+    if (!path.includes("/staticHoroschopes/") && !path.includes("/services")) {
+      window.scrollTo(0, 0);
+    }
   }, [path]);
 
   const fatchAstrologers = async () => {
@@ -103,19 +112,22 @@ const App = () => {
             <Route
               path="/horoscopes/:time/:horos"
               element={<HoroscopeDetails />}
+
             />
 
-            {/* horocopes data monthly and yearly */}
-            <Route path="/monthly/:zodiac?" element={<MonthlyHoroscope />} />
-            <Route path="/monthly" element={<MonthlyHoroscope />} />
-            <Route path="/yearly/:zodiac?" element={<YearlyHoroscope />} />
-            <Route path="/yearly" element={<YearlyHoroscope />} />
+
+
+            <Route path="/staticHoroschopes/:timePeriod/:zodiac?" element={<StaticHoroscopesMonthlyAndYearly />} />
+
+
+
+
 
             <Route path="/astro-login" element={<AstroLogin />} />
             <Route path="/astro-register" element={<AstroRegister />} />
             <Route path="/blogs" element={<Blog />} />
             <Route path="/blogs/:id" element={<BlogDetails />} />
-            <Route path="/services/:slug" element={<ServiceDetail />} />
+            <Route path="/services/:slug?" element={<ServiceDetail />} />
 
             <Route path="/annanprashan-muhurat" element={<Annanprashan />} />
             <Route path="/aamkaran-muhurat" element={<Namkaran />} />

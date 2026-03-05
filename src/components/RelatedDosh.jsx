@@ -7,7 +7,7 @@ const RelatedDosh = () => {
   const filtered = servicesData.filter((item) => item.slug !== slug);
 
   return (
-    <div className="bg-white rounded-3xl shadow-xl p-6 sticky top-5">
+    <div className="lg:col-span-1 lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto bg-white rounded-2xl shadow-sm border border-gray-100 p-4 order-1 lg:order-2"  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
       <h3 className="text-xl font-semibold mb-6">Related Dosh</h3>
 
       <div className="space-y-4">
@@ -35,7 +35,7 @@ const RelatedDosh = () => {
           Get detailed horoscope consultation from expert astrologers.
         </p>
         <Link
-          to="/talk-to-astrologer"
+          to={"/talk-to-astrologer"}
           className="inline-block bg-yellow-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-yellow-600 transition"
         >
           Book Consultation

@@ -446,6 +446,9 @@ const MobileNavSection = ({ navItems }) => {
 
   return (
     <div className="space-y-1">
+     
+      
+      
       {navItems.map((item, index) => (
         <div key={index}>
           <div
@@ -635,6 +638,8 @@ const Header = () => {
           : "bg-white"
         }`}
     >
+       <Link to={"/staticHoroschopes/monthly"}><button>month</button></Link>
+      <Link to={"/staticHoroschopes/yearly"}><button>year</button></Link>
       <div className="container mx-auto px-4 md:px-10 flex h-16 items-center justify-between   md:justify-center  gap-2.5 ">
         {/* Left side: Home link + desktop navigation */}
         <div className="flex items-center space-x-6 ">

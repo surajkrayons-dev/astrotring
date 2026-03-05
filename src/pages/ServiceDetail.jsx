@@ -8,11 +8,12 @@ import rehypeRaw from "rehype-raw";
 const ServiceDetail = () => {
   const { slug } = useParams();
   const [content, setContent] = useState("");
+  const currentSlug = slug ?? "mangal-dosh"
 
   useEffect(() => {
     const loadMarkdown = async () => {
       try {
-        const file = await import(`../content/services/${slug}.md?raw`);
+        const file = await import(`../content/services/${currentSlug}.md?raw`);
         setContent(file.default);
       } catch (err) {
         setContent("# Service Not Found");
@@ -20,7 +21,7 @@ const ServiceDetail = () => {
     };
 
     loadMarkdown();
-  }, [slug]);
+  }, [currentSlug]);
 
   return (
     <section className="bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50 py-12 md:py-16">
@@ -28,7 +29,7 @@ const ServiceDetail = () => {
         {/* Hero */}
         <div className="text-center mb-10 md:mb-14">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            {slug.replaceAll("-", " ").toUpperCase()}
+            {currentSlug.replaceAll("-", " ").toUpperCase()}
           </h1>
           <div className="w-20 md:w-24 h-1 bg-yellow-500 mx-auto rounded-full"></div>
         </div>
