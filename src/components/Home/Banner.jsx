@@ -88,80 +88,12 @@ const Banner = () => {
       py-3                      /* thoda kam vertical spacing */
     "
         >
-          {/* ================= Chat Card ================= */}
-          <Card
-            className="
-        relative
-        w-[130px]
-        sm:w-[170px]
-        md:w-[210px]
-        lg:w-[280px]
-        border-0 font-medium group
-      "
-          >
-            <span
-              className="absolute inset-0 transition-all duration-500 ease-out
-                       transform -skew-x-12
-                       bg-gradient-to-r
-                       from-[#FFD54F] via-[#FFB300] to-[#F57C00]
-                       group-hover:skew-x-12"
-            />
 
-            <span
-              className="absolute inset-0 transition-all duration-500 ease-out
-                       transform skew-x-12 opacity-90
-                       bg-gradient-to-r
-                       from-[#FFF176] via-[#f9ce86] to-[#ffdbc7]
-                       group-hover:-skew-x-12"
-            />
 
-            <Link to="/talk-to-astrologer" className="relative z-10 block">
-              <CardHeader
-                className="
-            flex items-center justify-between
-            px-2 py-1.5               /* height reduced */
-            sm:px-3 sm:py-2
-            md:px-4 md:py-2.5
-            lg:px-6 lg:py-4
-          "
-              >
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <span
-                    className="
-                flex items-center justify-center
-                w-5 h-5               /* icon reduced */
-                sm:w-6 sm:h-6
-                md:w-7 md:h-7
-                lg:w-10 lg:h-10
-                rounded-full bg-white/20 backdrop-blur-md
-                transition-all duration-300
-                group-hover:scale-110
-              "
-                  >
-                    <IoIosChatbubbles className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
-                  </span>
 
-                  <div className="leading-tight">
-                    <div className="font-semibold text-[10px] sm:text-xs md:text-sm lg:text-lg">
-                      Talk
-                    </div>
-                    <div className="text-[8px] sm:text-[10px] md:text-xs opacity-90">
-                      Talk with astrologer
-                    </div>
-                  </div>
-                </div>
-
-                <MoveRight
-                  className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5
-                                transition-all duration-300
-                                group-hover:translate-x-2"
-                />
-              </CardHeader>
-            </Link>
-          </Card>
 
           {/* ================= Talk Card ================= */}
-          {/* <Card className="relative w-[130px] sm:w-[170px] md:w-[210px] lg:w-[280px] border-0 font-medium group">
+          <Card className="relative w-[130px] sm:w-[170px] md:w-[210px] lg:w-[280px] border-0 font-medium group">
             <span className="absolute inset-0 transition-all duration-500 ease-out transform -skew-x-12 bg-gradient-to-r from-[#FFD54F] via-[#FFB300] to-[#F57C00] group-hover:skew-x-12" />
             <span className="absolute inset-0 transition-all duration-500 ease-out transform skew-x-12 opacity-90 bg-gradient-to-r from-[#FFF176] via-[#f9ce86] to-[#ffdbc7] group-hover:-skew-x-12" />
 
@@ -177,7 +109,7 @@ const Banner = () => {
                       Talk
                     </div>
                     <div className="text-[8px] sm:text-[10px] md:text-xs opacity-90">
-                      Call with astrologer
+                      Talk with astrologer
                     </div>
                   </div>
                 </div>
@@ -185,7 +117,7 @@ const Banner = () => {
                 <MoveRight className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 transition-all duration-300 group-hover:translate-x-2" />
               </CardHeader>
             </Link>
-          </Card> */}
+          </Card>
 
           {/* ================= Store Card ================= */}
           <Card className="relative w-[130px] sm:w-[170px] md:w-[210px] lg:w-[280px] border-0 font-medium group">
