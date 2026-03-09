@@ -17,6 +17,8 @@ import { userLogin, userProfile, userRegister } from "@/redux/slice/UserAuth";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ForgotPassword from "./ForgotPasswordUser";
+import { fileToBase64 } from "@/hooks/fileToBase64";  
+import {  Camera, Upload, X } from "lucide-react";  
 // import LanguageSwitcher from "@/LanguageSwitcher";
 
 /* ---------------- ZOD SCHEMAS ---------------- */
@@ -60,6 +62,8 @@ const UserLogin = ({ ele }) => {
     password: "",
     confirmPassword: "",
   });
+  const [profileImage, setProfileImage] = useState(null);
+const [imagePreview, setImagePreview] = useState("");
 
   const [errors, setErrors] = useState({
     fields: {},
@@ -95,6 +99,34 @@ const UserLogin = ({ ele }) => {
       form: "",
     }));
   };
+  // Image handler 
+const handleImageChange = async (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please select an image file");
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("Image size must be less than 2MB");
+      return;
+    }
+
+    try {
+      const base64 = await fileToBase64(file);   // ✅ utility use ki
+      setProfileImage(base64);
+      setImagePreview(URL.createObjectURL(file));
+    } catch (error) {
+      toast.error("Failed to process image");
+    }
+  }
+};
+// Remove image - ise add karo
+const removeImage = () => {
+  setProfileImage(null);
+  setImagePreview("");
+  document.getElementById("user-profile-upload").value = "";
+};
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -127,33 +159,45 @@ const UserLogin = ({ ele }) => {
     }
   };
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
 
-    const parsed = signupSchema.safeParse(form);
+const handleSignup = async (e) => {
+  e.preventDefault();
 
-    if (!parsed.success) {
-      setErrors({
-        fields: parsed.error.flatten().fieldErrors,
-        form: "Please fix the errors below",
-      });
-      return;
-    }
+  const parsed = signupSchema.safeParse(form);
 
-    const { confirmPassword, ...submitData } = parsed.data;
+  if (!parsed.success) {
+    setErrors({
+      fields: parsed.error.flatten().fieldErrors,
+      form: "Please fix the errors below",
+    });
+    return;
+  }
 
-    try {
-      await dispatch(userRegister(submitData)).unwrap();
-      toast.success("Register successful, please login");
-      setMode("login");
-    } catch (err) {
-      setErrors({
-        fields: {},
-        form: typeof err === "string" ? err : "Something went wrong",
-      });
-    }
+  // ✅ JSON object banayein 
+  const submitData = {
+    name: parsed.data.name,
+    email: parsed.data.email,
+    country_code: parsed.data.country_code,
+    mobile: parsed.data.mobile,
+    username: parsed.data.username,
+    password: parsed.data.password,
+    password_confirmation: parsed.data.confirmPassword,
+    profile_image: profileImage || null,   // ✅ Base64 string yahan directly
   };
 
+  try {
+    await dispatch(userRegister(submitData)).unwrap();
+    toast.success("Register successful, please login");
+    setMode("login");
+    setProfileImage(null);
+    setImagePreview("");
+  } catch (err) {
+    setErrors({
+      fields: {},
+      form: typeof err === "string" ? err : "Something went wrong",
+    });
+  }
+};
   /* ---------------- UI ---------------- */
 
   return (
@@ -274,6 +318,79 @@ const UserLogin = ({ ele }) => {
                 placeholder="Username"
                 onChange={handleChange}
               />
+              {/* ✅ YEH PHOTO UPLOAD FIELD - isko email aur mobile ke beech ya kahi bhi add kar do */}
+    <div className="space-y-1.5">
+      <Label className="text-sm flex items-center gap-1.5">
+        <Camera className="w-3.5 h-3.5" />
+        Profile Photo (Optional)
+      </Label>
+      <div
+        onClick={() => document.getElementById('user-profile-upload')?.click()}
+        onDragOver={(e) => {
+          e.preventDefault();
+          e.currentTarget.classList.add('border-yellow-500', 'bg-yellow-50');
+        }}
+        onDragLeave={(e) => {
+          e.preventDefault();
+          e.currentTarget.classList.remove('border-yellow-500', 'bg-yellow-50');
+        }}
+        onDrop={(e) => {
+          e.preventDefault();
+          e.currentTarget.classList.remove('border-yellow-500', 'bg-yellow-50');
+          const file = e.dataTransfer.files[0];
+          if (file) handleImageChange({ target: { files: [file] } });
+        }}
+        className={`
+          relative border border-dashed rounded-lg p-3
+          transition-all duration-200 cursor-pointer
+          ${imagePreview
+            ? 'border-green-300 bg-green-50/30'
+            : 'border-gray-300 bg-gray-50 hover:border-yellow-400 hover:bg-yellow-50/30'
+          }
+        `}
+      >
+        <input
+          id="user-profile-upload"
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="hidden"
+        />
+
+        {imagePreview ? (
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-white shadow-sm flex-shrink-0">
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <span className="text-xs text-gray-600 truncate max-w-[100px]">
+                Photo uploaded
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                removeImage();
+              }}
+              className="text-red-500 hover:text-red-700 p-0.5"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        ) : (
+          <div className="flex items-center gap-2 text-xs">
+            <Upload className="w-4 h-4 text-gray-400" />
+            <span className="text-gray-600 truncate">Click or drag photo</span>
+            <span className="text-gray-400 whitespace-nowrap">(2MB)</span>
+          </div>
+        )}
+      </div>
+    </div>
               <Input
                 type="password"
                 name="password"

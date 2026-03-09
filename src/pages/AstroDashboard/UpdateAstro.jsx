@@ -12,30 +12,32 @@ import { cn } from '@/lib/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { AstrologerProfile, AstrologerUpdate } from '@/redux/slice/AstroAuth';
 import { userProfile, userUpdate } from '@/redux/slice/UserAuth';
+import { fileToBase64 } from "@/hooks/fileToBase64";   // ✅ import
 
 // Move FormField component OUTSIDE
-const FormField = ({ label, name, type="text", placeholder, icon: Icon, required = false, className = '', value, onChange }) => {
+const FormField = ({ label, name, type = "text", placeholder, icon: Icon, required = false, className = '', value, onChange }) => {
   // console.log("type",type)
   // console.log("value",type)
-  return(
-  <div className="space-y-2">
-    <Label htmlFor={name} className="flex items-center gap-2 text-sm font-medium text-slate-700">
-      {Icon && <Icon className="w-4 h-4 text-slate-500" />}
-      {label}
-      {required && <span className="text-red-500">*</span>}
-    </Label>
-    <Input
-      id={name}
-      name={name}
-      type={type}
-      placeholder={placeholder}
-      value={type !== "date" ? value : value?.split("T")[0]}
-      onChange={onChange}
-      lang="en-GB"
-      className={cn("border-slate-200 focus:border-indigo-400 focus:ring-indigo-200", className)}
-    />
-  </div>
-)};
+  return (
+    <div className="space-y-2">
+      <Label htmlFor={name} className="flex items-center gap-2 text-sm font-medium text-slate-700">
+        {Icon && <Icon className="w-4 h-4 text-slate-500" />}
+        {label}
+        {required && <span className="text-red-500">*</span>}
+      </Label>
+      <Input
+        id={name}
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        value={type !== "date" ? value : value?.split("T")[0]}
+        onChange={onChange}
+        lang="en-GB"
+        className={cn("border-slate-200 focus:border-indigo-400 focus:ring-indigo-200", className)}
+      />
+    </div>
+  )
+};
 
 // Move MultiSelect component OUTSIDE with maxSelection limit
 const MultiSelect = ({ options, selected, setSelected, label, icon: Icon, maxSelection = null }) => {
@@ -101,21 +103,44 @@ function UpdateAstro() {
 
   const { astrologer, loading: astroLoading } = useSelector((state) => state.astroAuth);
   const { user, loading: userLoading } = useSelector((state) => state.userAuth);
-  
+
   const [role, setRole] = useState(localStorage.getItem("role_id"));
   const dispatch = useDispatch();
-  const [profileFile, setProfileFile] = useState(null);
+  const [profileImageBase64, setProfileImageBase64] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
 
+  //   if (file) {
+  //     setProfileFile(file);
+  //     setPreviewImage(URL.createObjectURL(file));
+  //   }
+  // };
+
+
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
     if (file) {
-      setProfileFile(file);
-      setPreviewImage(URL.createObjectURL(file));
+      // Validation (optional)
+      if (!file.type.startsWith('image/')) {
+        toast.error('Please select an image file');
+        return;
+      }
+      if (file.size > 2 * 1024 * 1024) {
+        toast.error('Image size must be less than 2MB');
+        return;
+      }
+
+      try {
+        const base64 = await fileToBase64(file);
+        setProfileImageBase64(base64);
+        setPreviewImage(URL.createObjectURL(file));   // preview ke liye
+      } catch (error) {
+        toast.error('Failed to process image');
+      }
     }
   };
-
-  const [formData, setFormData] = useState({ 
+  const [formData, setFormData] = useState({
     name: '',
     username: '',
     email: '',
@@ -136,16 +161,48 @@ function UpdateAstro() {
   const [selectedExpertise, setSelectedExpertise] = useState([]);
   const [selectedLanguages, setSelectedLanguages] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedQualification, setSelectedQualification] = useState([]);
+
 
   const expertiseOptions = ['tarot', 'vastu', 'numerology', 'palmistry', 'vedic', 'astrology', 'horoscope'];
   const languageOptions = ['english', 'hindi', 'bengali', 'tamil', 'telugu', 'marathi', 'gujarati'];
   const categoryOptions = ['love', 'marriage', 'health', 'career', 'finance', 'family', 'education'];
+  const qualificationOptions = [
+    { value: "self_learned", label: "Self Learned" },
+    { value: "diploma", label: "Diploma in Astrology" },
+    { value: "acharya", label: "Acharya in Astrology" },
+    { value: "phd", label: "PhD in Astrology" },
+  ];
+// qualification ke value ko lebel and lebel ko value me convert karne ke liye kyuki backend ko value send karna hai jab bhi user label par click kare 
+
+const qualificationValueToLabel = Object.fromEntries(
+  qualificationOptions.map(opt => [opt.value, opt.label])
+);
+const qualificationLabelToValue = Object.fromEntries(
+  qualificationOptions.map(opt => [opt.label, opt.value])
+);
+
+// ham aise bhi kar sakte hain but future me agar koi value add karenge to yaha bhi change karna padega isliye upar wala use kar rahe hain
+
+//   const qualificationValueToLabel = {
+//   "self_learned": "Self Learned",
+//   "diploma": "Diploma in Astrology",
+//   "acharya": "Acharya in Astrology",
+//   "phd": "PhD in Astrology"
+// };
+// const qualificationLabelToValue = {
+//   "Self Learned": "self_learned",
+//   "Diploma in Astrology": "diploma",
+//   "Acharya in Astrology": "acharya",
+//   "PhD in Astrology": "phd"
+// };
+
 
   // Determine which data to use based on role
   const isAstrologer = role === "2";
   const currentProfile = isAstrologer ? astrologer : user;
   const loading = isAstrologer ? astroLoading : userLoading;
-  console.log("current profile",currentProfile)
+  console.log("current profile", currentProfile)
 
   useEffect(() => {
     if (currentProfile) {
@@ -172,6 +229,9 @@ function UpdateAstro() {
         setSelectedExpertise(currentProfile?.expertise || []);
         setSelectedLanguages(currentProfile?.languages || []);
         setSelectedCategories(currentProfile?.category || []);
+        const values = currentProfile?.astro_education || [];
+const labels = values.map(v => qualificationValueToLabel[v]).filter(Boolean);
+setSelectedQualification(labels);
       }
     }
   }, [currentProfile, isAstrologer]);
@@ -181,50 +241,91 @@ function UpdateAstro() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // const handleSubmit = async () => {
+  //   const fd = new FormData();
+
+  //   fd.append("name", formData.name);
+  //   fd.append("username", formData.username);
+  //   fd.append("email", formData.email);
+  //   fd.append("mobile", formData.mobile);
+  //   fd.append("country_code", formData.countryCode);
+  //   fd.append("gender", formData.gender);
+  //   fd.append("dob", formData.dob);
+  //   fd.append("birth_place", formData.birthPlace);
+  //   fd.append("birth_time", formData.birthTime);
+  //   fd.append("about", formData.about);
+  //   fd.append("address", formData.address);
+  //   fd.append("pincode", formData.pincode);
+
+  //   if (profileFile) {
+  //     fd.append("profile_image", profileFile);
+  //   }
+
+  //   try {
+  //     if (isAstrologer) {
+  //       fd.append("experience", parseInt(formData.experience) || 0);
+  //       fd.append("chat_price", parseFloat(formData.chatPrice) || 0);
+  //       fd.append("call_price", parseFloat(formData.callPrice) || 0);
+
+  //       selectedExpertise.forEach((i) => fd.append("expertise[]", i));
+  //       selectedLanguages.forEach((i) => fd.append("languages[]", i));
+  //       selectedCategories.forEach((i) => fd.append("category[]", i));
+
+  //       await dispatch(AstrologerUpdate(fd)).unwrap();
+  //       await dispatch(AstrologerProfile()).unwrap();
+  //     } else {
+  //       await dispatch(userUpdate(fd)).unwrap();
+  //       await dispatch(userProfile()).unwrap();
+  //     }
+
+  //     console.log("Profile updated successfully");
+  //   } catch (error) {
+  //     console.error("Update failed:", error);
+  //   }
+  // };
+
   const handleSubmit = async () => {
-    const fd = new FormData();
+    // ✅ JSON object banayein
+    const updateData = {
+      name: formData.name,
+      username: formData.username,
+      email: formData.email,
+      mobile: formData.mobile,
+      country_code: formData.countryCode,
+      gender: formData.gender,
+      dob: formData.dob,
+      birth_place: formData.birthPlace,
+      birth_time: formData.birthTime,
+      about: formData.about,
+      address: formData.address,
+      pincode: formData.pincode,
+      profile_image: profileImageBase64 || null,   // ✅ Base64 string
+    };
 
-    fd.append("name", formData.name);
-    fd.append("username", formData.username);
-    fd.append("email", formData.email);
-    fd.append("mobile", formData.mobile);
-    fd.append("country_code", formData.countryCode);
-    fd.append("gender", formData.gender);
-    fd.append("dob", formData.dob);
-    fd.append("birth_place", formData.birthPlace);
-    fd.append("birth_time", formData.birthTime);
-    fd.append("about", formData.about);
-    fd.append("address", formData.address);
-    fd.append("pincode", formData.pincode);
-
-    if (profileFile) {
-      fd.append("profile_image", profileFile);
+    if (isAstrologer) {
+      updateData.experience = parseInt(formData.experience) || 0;
+      updateData.chat_price = parseFloat(formData.chatPrice) || 0;
+      updateData.call_price = parseFloat(formData.callPrice) || 0;
+      updateData.expertise = selectedExpertise;
+      updateData.languages = selectedLanguages;
+      updateData.category = selectedCategories;
+      updateData.astro_education = selectedQualification.map(label => qualificationLabelToValue[label]);
     }
 
     try {
       if (isAstrologer) {
-        fd.append("experience", parseInt(formData.experience) || 0);
-        fd.append("chat_price", parseFloat(formData.chatPrice) || 0);
-        fd.append("call_price", parseFloat(formData.callPrice) || 0);
-
-        selectedExpertise.forEach((i) => fd.append("expertise[]", i));
-        selectedLanguages.forEach((i) => fd.append("languages[]", i));
-        selectedCategories.forEach((i) => fd.append("category[]", i));
-
-        await dispatch(AstrologerUpdate(fd)).unwrap();
+        await dispatch(AstrologerUpdate(updateData)).unwrap();
         await dispatch(AstrologerProfile()).unwrap();
       } else {
-        await dispatch(userUpdate(fd)).unwrap();
+        await dispatch(userUpdate(updateData)).unwrap();
         await dispatch(userProfile()).unwrap();
       }
-
-      console.log("Profile updated successfully");
+      toast.success('Profile updated successfully');
     } catch (error) {
-      console.error("Update failed:", error);
+      console.error('Update failed:', error);
+      toast.error('Update failed');
     }
   };
-
-
   const handleCancel = () => {
     if (confirm('Are you sure you want to discard changes?')) {
       window.history.back();
@@ -503,13 +604,14 @@ function UpdateAstro() {
                   maxSelection={3}
                 />
                 <MultiSelect
-                  options={categoryOptions}
-                  selected={selectedCategories}
-                  setSelected={setSelectedCategories}
-                  label="Consultation Categories"
-                  icon={Globe}
-                  maxSelection={3}
+                  options={qualificationOptions.map(opt => opt.label)}  // MultiSelect expects array of strings
+                  selected={selectedQualification}
+                  setSelected={setSelectedQualification}
+                  label="Astrology Qualification"
+                  icon={Award}
+                  maxSelection={null}  // allow multiple (as per registration)
                 />
+
               </CardContent>
             </Card>
           )}
