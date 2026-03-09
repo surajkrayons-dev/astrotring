@@ -17,7 +17,6 @@ import BhumiPuja from "./pages/FooterMahurat/BhumiPuja";
 import GrihaPravesh from "./pages/FooterMahurat/GrihaPravesh";
 import Mundan from "./pages/FooterMahurat/Mundan";
 
-
 // import BlogPage from "./pages/BlogPage";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -33,16 +32,15 @@ const HoroscopeDetails = lazy(
   () => import("./components/Horoscopes/HoroscopeDetails"),
 );
 const Horoscopes = lazy(() => import("./pages/Horoscopes"));
-const StaticHoroscopesMonthlyAndYearly = lazy(() =>
-  import("./pages/staticHoroscopesMonthlyAndYearly/StaticHoroscopesMonthlyAndYearly")
+const StaticHoroscopesMonthlyAndYearly = lazy(
+  () =>
+    import("./pages/staticHoroscopesMonthlyAndYearly/StaticHoroscopesMonthlyAndYearly"),
 );
 const UpdateUser = lazy(() => import("./components/Home/UpdateUser"));
 const ForgotPassword = lazy(() => import("./components/ForgotPasswordUser"));
 const ForgotPasswordAstro = lazy(
   () => import("./components/ForgotPasswordAstro"),
 );
-
-
 
 const Dashboard = lazy(() => import("./pages/AstroDashboard/Dashboard"));
 const UpdateAstro = lazy(() => import("./pages/AstroDashboard/UpdateAstro"));
@@ -78,7 +76,6 @@ const App = () => {
   //   window.scrollTo(0, 0);
   // }, [path]);
   useEffect(() => {
-
     if (!path.includes("/staticHoroschopes/") && !path.includes("/services")) {
       window.scrollTo(0, 0);
     }
@@ -112,23 +109,20 @@ const App = () => {
             <Route
               path="/horoscopes/:time/:horos"
               element={<HoroscopeDetails />}
-
             />
 
-
-
-            <Route path="/staticHoroschopes/:timePeriod/:zodiac?" element={<StaticHoroscopesMonthlyAndYearly />} />
-
-
-
-
+            <Route
+              path="/staticHoroschopes/:timePeriod/:zodiac?"
+              element={<StaticHoroscopesMonthlyAndYearly />}
+            />
 
             <Route path="/astro-login" element={<AstroLogin />} />
             <Route path="/astro-register" element={<AstroRegister />} />
+            {/* <Route path="/blogs" element={<Blog />} />
+            <Route path="/blogs/:id" element={<BlogDetails />} /> */}
             <Route path="/blogs" element={<Blog />} />
-            <Route path="/blogs/:id" element={<BlogDetails />} />
+            <Route path="/blogs/:slug" element={<BlogDetails />} />
             <Route path="/services/:slug?" element={<ServiceDetail />} />
-
             <Route path="/annanprashan-muhurat" element={<Annanprashan />} />
             <Route path="/aamkaran-muhurat" element={<Namkaran />} />
             <Route path="/car-bike-muhurat" element={<CarBike />} />

@@ -434,8 +434,6 @@ import { AstrologerLogout, AstrologerProfile } from "@/redux/slice/AstroAuth";
 import { userLogout, userProfile } from "@/redux/slice/UserAuth";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
-
-
 // Mobile Navigation Section Component (unchanged)
 const MobileNavSection = ({ navItems }) => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -446,9 +444,6 @@ const MobileNavSection = ({ navItems }) => {
 
   return (
     <div className="space-y-1">
-     
-      
-      
       {navItems.map((item, index) => (
         <div key={index}>
           <div
@@ -545,14 +540,11 @@ const Header = () => {
       const role = Number(localStorage.getItem("role_id"));
       if (role === 2) {
         await dispatch(AstrologerLogout()).unwrap();
-        
       } else if (role === 3) {
         await dispatch(userLogout()).unwrap();
-        
       }
       localStorage.removeItem("token");
       localStorage.removeItem("role_id");
-      
     } catch (err) {
       console.log("Logout error:", err);
     }
@@ -579,7 +571,7 @@ const Header = () => {
     },
     {
       name: "Store",
-      path: "https://store.astrotring.com/product",
+      path: "https://store.astrotring.com",
       type: "link",
       hasmenu: false,
     },
@@ -594,12 +586,10 @@ const Header = () => {
   useEffect(() => {
     if (!horoscope) {
       const fetchHoroscopes = async () => {
-         
         try {
           await dispatch(getHoroscope()).unwrap();
-          
         } catch (error) {
-          console.log({error});
+          console.log({ error });
         }
       };
       fetchHoroscopes();
@@ -613,14 +603,11 @@ const Header = () => {
         const horos = [];
         horoscope.forEach((ele) => {
           if (ele.type && !horosSet.has(ele.type)) {
+            // filhaal ke liye weekly wala horoschope ko skip kar raha hu kyuki hamare pass abhi week ka data nhi hai
+            if (ele.type.toLowerCase() === "weekly") {
+              return;
+            }
 
-// filhaal ke liye weekly wala horoschope ko skip kar raha hu kyuki hamare pass abhi week ka data nhi hai
-if (ele.type.toLowerCase() === 'weekly') {
-            return; 
-          }
-
-
-            
             horosSet.add(ele.type);
             horos.push({
               label:
@@ -641,12 +628,12 @@ if (ele.type.toLowerCase() === 'weekly') {
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ease-in-out
-      ${scrolled
+      ${
+        scrolled
           ? "bg-white/60 backdrop-blur-lg shadow-lg border-b border-white/20"
           : "bg-white"
-        }`}
+      }`}
     >
-      
       <div className="container mx-auto px-4 md:px-10 flex h-16 items-center justify-between   md:justify-center  gap-2.5 ">
         {/* Left side: Home link + desktop navigation */}
         <div className="flex items-center space-x-6 ">
