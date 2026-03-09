@@ -36,13 +36,16 @@ const Footer = () => {
 
         horoscope.forEach((ele) => {
           if (ele.type && !horosSet.has(ele.type)) {
+            if (ele.type.toLowerCase() === "weekly") {
+              return;
+            }
             horosSet.add(ele.type);
             horos.push({
               label:
                 ele.type.charAt(0).toUpperCase() +
                 ele.type.slice(1) +
                 " Horoscope",
-              path: `/horoscopes/${ele.type.toLowerCase()}`,
+              path: `/staticHoroschopes/${ele.type.toLowerCase()}`,
             });
           }
         });
@@ -71,7 +74,19 @@ const Footer = () => {
                 About Astrotring
               </h2>
               <p className="text-white text-sm! ">
-                AstroTring is your ultimate destination for accurate Vedic astrology predictions, offering personalized Kundli analysis, horoscope matching, and real-time guidance on love, marriage, career, health, and finance. Powered by AI-driven insights and expert astrologers, we decode your birth chart to reveal your cosmic blueprint and life's true purpose. From live call and chat consultations to detailed astrology reports, AstroTring makes ancient Vedic wisdom accessible anytime, anywhere. Our verified astrologers provide authentic remedies, compatibility readings, and date-of-birth predictions to help you make confident, well-guided life decisions. Rooted in tradition and driven by technology, AstroTring bridges the timeless wisdom of the cosmos with the clarity you need to navigate modern life.
+                AstroTring is your ultimate destination for accurate Vedic
+                astrology predictions, offering personalized Kundli analysis,
+                horoscope matching, and real-time guidance on love, marriage,
+                career, health, and finance. Powered by AI-driven insights and
+                expert astrologers, we decode your birth chart to reveal your
+                cosmic blueprint and life's true purpose. From live call and
+                chat consultations to detailed astrology reports, AstroTring
+                makes ancient Vedic wisdom accessible anytime, anywhere. Our
+                verified astrologers provide authentic remedies, compatibility
+                readings, and date-of-birth predictions to help you make
+                confident, well-guided life decisions. Rooted in tradition and
+                driven by technology, AstroTring bridges the timeless wisdom of
+                the cosmos with the clarity you need to navigate modern life.
               </p>
             </div>
           </div>
@@ -156,13 +171,12 @@ const Footer = () => {
 
                 <ul className="mt-2">
                   <li className="text-white text-sm mb-2   transition-all duration-300 hover:translate-x-2">
-                    <Link to={"https://store.astrotring.com/product"}>
+                    <Link to={"https://store.astrotring.com"}>
                       <FaAnglesRight className="me-2 inline" /> Store
                     </Link>
                   </li>
                   <li className="text-white text-sm mb-2   transition-all duration-300 hover:translate-x-2">
                     <Link to={"/talk-to-astrologer"}>
-
                       <FaAnglesRight className="me-2 inline" /> Chat / Call with
                       Astrologer
                     </Link>
@@ -427,10 +441,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      {/* <div className=" bg-black text-white text-center py-5 mt-5">
-        Copyright {new Date().getFullYear()} Astrology (Powered by Astrology
-        Services Private Limited). All Rights Reserved
-      </div> */}
       <div className="bg-black text-white text-center py-5 mt-5">
         © {new Date().getFullYear()} Astrotring. All Rights Reserved.
       </div>

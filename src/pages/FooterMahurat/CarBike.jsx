@@ -1,3 +1,4 @@
+import HeadWithLogo from "@/components/HeadWithLogo";
 import React from "react";
 
 const CarBike = () => {

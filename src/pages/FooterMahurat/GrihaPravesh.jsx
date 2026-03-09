@@ -1,11 +1,11 @@
+import HeadWithLogo from "@/components/HeadWithLogo";
 import React from "react";
 
 const GrihaPravesh = () => {
   return (
     <section className="py-10">
       <div className="container mx-auto space-y-6">
- 
-   <HeadWithLogo title={"Griha Pravesh Muhurat 2026"} />
+        <HeadWithLogo title={"Griha Pravesh Muhurat 2026"} />
         <p>
           Griha Pravesh is a sacred Hindu ceremony performed when entering a new
           home for the first time. In 2026, this ritual continues to hold great
@@ -14,10 +14,10 @@ const GrihaPravesh = () => {
         </p>
 
         <p>
-          This ceremony is not just a housewarming. It helps purify the new home,
-          invite positive energies, and remove negativity. Families perform
-          Griha Pravesh to seek blessings for peace, health, and success in their
-          new space.
+          This ceremony is not just a housewarming. It helps purify the new
+          home, invite positive energies, and remove negativity. Families
+          perform Griha Pravesh to seek blessings for peace, health, and success
+          in their new space.
         </p>
 
         <p>
@@ -48,11 +48,10 @@ const GrihaPravesh = () => {
         </h2>
 
         <ul className="list-disc pl-6 space-y-2">
-
           <li>
-            <strong>Auspicious Muhurat:</strong> Choosing the right date and time
-            is very important. Planetary positions are checked to ensure positive
-            energy for the family.
+            <strong>Auspicious Muhurat:</strong> Choosing the right date and
+            time is very important. Planetary positions are checked to ensure
+            positive energy for the family.
           </li>
 
           <li>
@@ -71,9 +70,7 @@ const GrihaPravesh = () => {
             are sometimes checked to select the best Muhurat for maximum
             benefits.
           </li>
-
         </ul>
-
       </div>
     </section>
   );
