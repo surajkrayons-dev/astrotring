@@ -2,7 +2,7 @@ const Disclaimer = () => {
   return (
     <div className="text-black text-xs text-center py-2 px-4 border-t">
       {" "}
-      Astrology services on{" "}
+      <strong>Disclaimer :</strong> Astrology services on{" "}
       <a
         href="https://www.astrotring.com"
         className="underline hover:text-primary"
