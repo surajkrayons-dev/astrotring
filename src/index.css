@@ -11,7 +11,8 @@
   @apply bg-[#FFFFFF] py-16;
 }
 
-/* Container */
+/* 
+ */
 .banner-container {
   @apply max-w-6xl mx-auto px-10;
 }
