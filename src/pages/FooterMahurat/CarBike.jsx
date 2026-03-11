@@ -2,76 +2,227 @@ import HeadWithLogo from "@/components/HeadWithLogo";
 import React from "react";
 
 const CarBike = () => {
-    return (
-        <section className="py-10">
-            <div className="container mx-auto space-y-6">
+  return (
+    <section className="py-10">
+      <div className="container mx-auto max-w-4xl space-y-8">
+        <HeadWithLogo title={"Car / Bike Muhurat 2026"} />
 
-              
-   <HeadWithLogo title={" Car / Bike Muhurat 2026"} />
-                <h2 className="text-lg font-semibold">
-                    The Perfect Time for Your Dream Ride
-                </h2>
+        {/* Kicker */}
+        <p className="text-sm font-semibold tracking-widest text-orange-600 uppercase">
+          Vehicle Purchase · Auspicious Timing · Jyotish
+        </p>
 
-                <p>
-                    In today’s fast-moving world, owning a vehicle is more than just
-                    convenience. For many people, a car or bike represents freedom,
-                    success, and new journeys in life.
-                </p>
+        {/* Title */}
+        <h1 className="text-3xl md:text-4xl font-bold leading-tight">
+          Car & Bike Muhurat 2026: The Best Auspicious Times to Buy Your New
+          Vehicle
+        </h1>
 
-                <p>
-                    In Indian culture, buying a vehicle is not only about the purchase —
-                    timing also matters. Choosing the right Muhurat is believed to bring
-                    good luck, safety, and positive energy.
-                </p>
+        {/* Subtitle */}
+        <p className="text-gray-700 text-lg leading-relaxed">
+          A clear, honest guide to why muhurat matters for vehicle purchases —
+          and how to find the right time in 2026 for your new car or bike.
+        </p>
 
-                <p>
-                    In 2026, Car and Bike Muhurat helps you select the most auspicious time
-                    to buy your vehicle. These special timings are decided based on
-                    planetary positions and are believed to support success and
-                    well-being.
-                </p>
+        {/* Quick Answer */}
+        <div className="bg-orange-50 border border-orange-200 rounded-lg p-6 space-y-3">
+          <h2 className="font-semibold text-lg">⚡ QUICK ANSWER</h2>
 
-                <p>
-                    Whether you are buying your first vehicle, upgrading to a new one, or
-                    purchasing your dream bike, selecting a good Muhurat can help ensure a
-                    smooth and prosperous journey ahead.
-                </p>
+          <p>
+            Car and Bike Muhurat refers to the auspicious dates and times
+            selected through Vedic astrology (Jyotish Shastra) for purchasing a
+            new vehicle.
+          </p>
 
-                <p>
-                    For personalised guidance, you can also connect with an astrologer
-                    through call or chat.
-                </p>
+          <p>
+            In 2026, the ideal muhurat is calculated using Panchang elements —
+            Tithi, Nakshatra, Vara, Yoga, and Karana — along with the buyer's
+            birth chart. The goal is to begin the vehicle's journey on a
+            positive cosmic note.
+          </p>
+        </div>
 
-                <h2 className="text-xl font-semibold mt-6">
-                    Why is Muhurat Important for Buying a Car or Bike?
-                </h2>
+        {/* Section */}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">
+            Why Do Indians Choose a Muhurat to Buy a Car or Bike?
+          </h2>
 
-                <p>
-                    Muhurat has a special place in Indian traditions. It is believed that
-                    starting something new during an auspicious time increases the chance
-                    of positive outcomes.
-                </p>
+          <p>
+            In a country where vehicles carry people to weddings, pilgrimages,
+            hospital deliveries, and first days of school — a car or bike is not
+            just a machine. It is a witness to life.
+          </p>
 
-                <p>
-                    Buying a vehicle marks the beginning of many journeys. Choosing the
-                    right Muhurat is thought to bring protection, improve the life of the
-                    vehicle, and attract prosperity.
-                </p>
+          <p>
+            Choosing an auspicious muhurat for a vehicle purchase is rooted in a
+            simple but powerful idea: beginnings matter. Starting something
+            important at the right moment aligns the journey with supportive
+            energy.
+          </p>
 
-                <p>
-                    Astrologers suggest selecting a time when planets support new
-                    beginnings. This is believed to reduce chances of accidents, avoid
-                    frequent mechanical problems, and bring peace of mind to the owner.
-                </p>
+          <blockquote className="border-l-4 border-orange-500 pl-4 italic text-gray-700">
+            "A vehicle bought on an auspicious muhurat is believed to travel
+            more safely, require fewer repairs, and bring prosperity to its
+            owner."
+          </blockquote>
 
-                <p>
-                    A well-chosen Muhurat can help you feel confident, secure, and happy
-                    with your new car or bike.
-                </p>
+          <p>
+            Choosing a muhurat is less about superstition and more about mindful
+            intention — pausing to begin a new chapter of life thoughtfully.
+          </p>
+        </div>
 
-            </div>
-        </section>
-    );
+        {/* Panchang Table */}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">
+            What Makes a Good Vehicle Purchase Muhurat in 2026?
+          </h2>
+
+          <p>
+            Vedic astrologers evaluate the Panchang — the five-limbed almanac —
+            to identify favourable windows for new purchases.
+          </p>
+
+          <div className="overflow-x-auto">
+            <table className="w-full border border-gray-300 text-left">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="border p-3">Factor</th>
+                  <th className="border p-3">Favourable Conditions</th>
+                  <th className="border p-3">What to Avoid</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td className="border p-3">Tithi</td>
+                  <td className="border p-3">
+                    Dwitiya, Tritiya, Panchami, Saptami, Dasami, Ekadashi,
+                    Trayodashi
+                  </td>
+                  <td className="border p-3">Amavasya, Chaturdashi, Ashtami</td>
+                </tr>
+
+                <tr>
+                  <td className="border p-3">Nakshatra</td>
+                  <td className="border p-3">
+                    Pushya, Rohini, Hasta, Ashwini, Revati, Anuradha
+                  </td>
+                  <td className="border p-3">
+                    Ardra, Jyeshtha, Bharani, Krittika
+                  </td>
+                </tr>
+
+                <tr>
+                  <td className="border p-3">Vara</td>
+                  <td className="border p-3">Wednesday, Thursday, Friday</td>
+                  <td className="border p-3">Saturday for new purchases</td>
+                </tr>
+
+                <tr>
+                  <td className="border p-3">Rahu / Ketu</td>
+                  <td className="border p-3">
+                    Avoid Rahu Kalam and Ketu Kalam entirely
+                  </td>
+                  <td className="border p-3">Varies daily</td>
+                </tr>
+
+                <tr>
+                  <td className="border p-3">Lagna</td>
+                  <td className="border p-3">
+                    Strong ascendant in buyer's chart
+                  </td>
+                  <td className="border p-3">Afflicted 8th house</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            Additionally, Venus (Shukra) — the planet governing vehicles and
+            luxury — should ideally be in a strong position.
+          </p>
+        </div>
+
+        {/* Tips */}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">
+            Practical Tips: Making the Most of Your Vehicle Muhurat
+          </h2>
+
+          <h3 className="font-semibold">Before You Buy</h3>
+
+          <ul className="list-disc pl-6 space-y-2">
+            <li>Confirm the muhurat with your astrologer in advance.</li>
+            <li>Prepare documents and payment beforehand.</li>
+            <li>Inform the dealership about your preferred timing.</li>
+          </ul>
+
+          <h3 className="font-semibold mt-4">On the Day</h3>
+
+          <ul className="list-disc pl-6 space-y-2">
+            <li>Perform a small Ganesh Puja.</li>
+            <li>Apply tilak and garland the vehicle.</li>
+            <li>Drive the vehicle to a temple for blessings.</li>
+            <li>Distribute sweets to family and friends.</li>
+          </ul>
+        </div>
+
+        {/* FAQ */}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">Frequently Asked Questions</h2>
+
+          <p>
+            <strong>
+              Does muhurat guarantee the vehicle won't have problems?
+            </strong>
+            <br />
+            No. Muhurat is about intention and alignment, not mechanical
+            guarantees.
+          </p>
+
+          <p>
+            <strong>What if the muhurat falls on a weekday?</strong>
+            <br />
+            Astrologers usually provide multiple suitable dates so you can
+            choose one that fits your schedule.
+          </p>
+
+          <p>
+            <strong>Is there a different muhurat for bikes vs cars?</strong>
+            <br />
+            The principles are the same, though some astrologers consider
+            planetary influences differently depending on vehicle type.
+          </p>
+        </div>
+
+        {/* Final Note */}
+        <div className="space-y-3">
+          <h2 className="text-2xl font-semibold">A Final Note</h2>
+
+          <p>
+            Every journey begins somewhere. A muhurat is simply a way of asking:
+            when is the best moment to begin this one?
+          </p>
+
+          <p>
+            Whether you follow Vedic tradition deeply or lightly — pausing,
+            consulting, and choosing mindfully before a major purchase is
+            wisdom.
+          </p>
+
+          <p>May every road ahead be smooth. 🙏</p>
+        </div>
+
+        <p className="text-sm text-gray-600">
+          Tags: Car Muhurat 2026 | Bike Muhurat 2026 | Vehicle Purchase
+          Auspicious Time | Shubh Muhurat New Car | Jyotish Shastra | Panchang
+          2026 | Akshaya Tritiya 2026
+        </p>
+      </div>
+    </section>
+  );
 };
 
 export default CarBike;
