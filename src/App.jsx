@@ -16,11 +16,9 @@ import Marriage from "./pages/FooterMahurat/Marriage";
 import BhumiPuja from "./pages/FooterMahurat/BhumiPuja";
 import GrihaPravesh from "./pages/FooterMahurat/GrihaPravesh";
 import Mundan from "./pages/FooterMahurat/Mundan";
-import RefundAndPolicy from "./pages/RefundAndPolicy";
-import PrivacyAndPolicy from "./pages/PrivacyAndPolicy";
-import ShippingAndPolicy from "./pages/ShippingAndPolicy";
-import TermAndCondition from "./pages/TermAndCondition";
-import DisclaimerPage from "./pages/DisclaimerPage";
+// import AstrologerServiceProviderTermsAndConditionsPage from "./pages/legal/AstrologerServiceProviderTermsAndConditionsPage";
+
+
 
 // import BlogPage from "./pages/BlogPage";
 
@@ -54,6 +52,15 @@ const WidhdrowHistory = lazy(
   () => import("./pages/AstroDashboard/WidhdrowHistory"),
 );
 const ServiceDetail = lazy(() => import("./pages/ServiceDetail"));
+
+
+// all policies are lazy loaded
+const DisclaimerPage = lazy(() => import("./pages/legal/DisclaimerPage"));
+const PrivacyPolicyPage = lazy(() => import("./pages/legal/PrivacyPolicyPage"));
+const RefundPolicyPage = lazy(() => import("./pages/legal/RefundPolicyPage"));
+const ShippingPolicyPage = lazy(() => import("./pages/legal/ShippingPolicyPage"));
+const TermsAndConditionsPage = lazy(() => import("./pages/legal/TermsAndConditionsPage"));
+const AstrologerServiceProviderTermsAndConditionsPage = lazy(() => import("./pages/legal/AstrologerServiceProviderTermsAndConditionsPage"));
 
 const App = () => {
   const path = useLocation().pathname;
@@ -119,11 +126,19 @@ const App = () => {
               path="/staticHoroschopes/:timePeriod/:zodiac?"
               element={<StaticHoroscopesMonthlyAndYearly />}
             />
-            <Route path="/refund-policy" element={<RefundAndPolicy />} />
-            <Route path="/shipping-policy" element={<ShippingAndPolicy />} />
-            <Route path="/privacy-policy" element={<PrivacyAndPolicy />} />
-            <Route path="/terms-conditions" element={<TermAndCondition />} />
+
+
+            {/* all policies are here */}
+            <Route path="/refund-policy" element={<RefundPolicyPage />} />
+            <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms-conditions" element={<TermsAndConditionsPage />} />
             <Route path="/disclaimer" element={<DisclaimerPage />} />
+            <Route path="/astrologer-serviceProvider-TnC" element={<AstrologerServiceProviderTermsAndConditionsPage />} />
+
+
+
+
             <Route path="/astro-login" element={<AstroLogin />} />
             <Route path="/astro-register" element={<AstroRegister />} />
             {/* <Route path="/blogs" element={<Blog />} />
@@ -131,6 +146,8 @@ const App = () => {
             <Route path="/blogs" element={<Blog />} />
             <Route path="/blogs/:slug" element={<BlogDetails />} />
             <Route path="/services/:slug?" element={<ServiceDetail />} />
+
+            {/* all muhurt's are here */}
             <Route path="/annanprashan-muhurat" element={<Annanprashan />} />
             <Route path="/aamkaran-muhurat" element={<Namkaran />} />
             <Route path="/car-bike-muhurat" element={<CarBike />} />
@@ -139,7 +156,7 @@ const App = () => {
             <Route path="/griha-pravesh-muhurat" element={<GrihaPravesh />} />
             <Route path="/mundan-muhurat" element={<Mundan />} />
           </Route>
-
+{/* Dashboard starts from here */}
           <Route path="/dashboard" element={<AstroLayout />}>
             <Route path="/dashboard/profile" element={<Dashboard />} />
             <Route path="/dashboard/update-astro" element={<UpdateAstro />} />
