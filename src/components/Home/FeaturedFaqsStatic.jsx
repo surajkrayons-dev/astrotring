@@ -187,7 +187,7 @@ const faqList = [
   { id: 7, queKey: "faq.7.question", ansKey: "faq.7.answer" },
 ];
 
-const MinimalFaqList = () => {
+const FeaturedFaqsStatic = () => {
   const { t } = useTranslation();
 
   // Function to render translated answer and keep [[link]] active
@@ -223,13 +223,13 @@ const MinimalFaqList = () => {
     <section className="py-10 bg-white">
       <div className="container mx-auto">
         {/* FAQ List - Minimal, clean, no numbers/icons */}
-        <div className="space-y-6 md:space-y-8">
+        <div className="space-y-4">
           {faqList.map((faq, index) => (
             <div key={faq.id}>
               {/* Question */}
-              <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-800 mb-2 md:mb-3">
+              <h1 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3">
                 {t(faq.queKey)}
-              </h3>
+              </h1>
 
               {/* Answer */}
               <div className="text-sm  text-gray-600 leading-relaxed">
@@ -248,5 +248,5 @@ const MinimalFaqList = () => {
   );
 };
 
-export default MinimalFaqList;
+export default FeaturedFaqsStatic;
 

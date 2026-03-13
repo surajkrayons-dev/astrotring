@@ -252,7 +252,7 @@ export const refundPolicyData = {
             },
             {
               type: "paragraph",
-              text: "Email: support@astrotring.com"
+              text: "Email: mail@astrotring.com"
             },
             {
               type: "paragraph",
