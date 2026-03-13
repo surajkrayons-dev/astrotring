@@ -227,12 +227,12 @@ const MinimalFaqList = () => {
           {faqList.map((faq, index) => (
             <div key={faq.id}>
               {/* Question */}
-              <h3 className="text-base sm:text-lg md:text-xl font-normal text-gray-800 mb-2 md:mb-3">
+              <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-800 mb-2 md:mb-3">
                 {t(faq.queKey)}
               </h3>
 
               {/* Answer */}
-              <div className="text-sm sm:text-base text-gray-600 leading-relaxed">
+              <div className="text-sm  text-gray-600 leading-relaxed">
                 {renderAnswer(faq.ansKey)}
               </div>
 
