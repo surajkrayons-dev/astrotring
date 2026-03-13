@@ -935,6 +935,7 @@ const AstroRegister = () => {
   const [loadingCountries, setLoadingCountries] = useState(true);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [registrationCode, setRegistrationCode] = useState("");
+const [termsAccepted, setTermsAccepted] = useState(false);
 
   // Form state
   const [form, setForm] = useState({
@@ -1197,6 +1198,11 @@ const AstroRegister = () => {
       newErrors.astro_education = "Please select your astrology qualification";
     }
 
+    // TnC validation
+    if (!termsAccepted) {
+  newErrors.terms = "You must accept the Terms & Conditions to register.";
+}
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -1229,7 +1235,8 @@ const AstroRegister = () => {
     address: form.address.trim() || null,
     pincode: form.pincode.trim() || null,
     astro_education: form.astro_education,
-    profile_image: profileImage || null,   // ✅ Base64 string yahan directly
+    profile_image: profileImage || null,   // ✅ Base64 string  directly
+    terms_accepted: termsAccepted ? 1 : 0,
   };
 
   try {
@@ -1893,6 +1900,36 @@ const AstroRegister = () => {
                 </div>
               </div>
 
+              {/* Terms and Conditions */}
+<div className="space-y-2">
+  <div className="flex items-start gap-2">
+    <input
+      type="checkbox"
+      id="terms"
+      checked={termsAccepted}
+      onChange={(e) => setTermsAccepted(e.target.checked)}
+      className="mt-0.3 cursor-pointer"
+    />
+    <label htmlFor="terms" className="text-xs text-gray-600" style={{ fontSize: '12px',color: '#4b5563' }}>
+      I have read and agree to the{" "}
+      <Link
+        to="/astrologer-serviceProvider-TnC"
+        target="_blank"
+        className="text-amber-600 hover:underline"
+      >
+        Terms & Conditions
+      </Link>{" "}
+      
+    </label>
+  </div>
+  {errors.terms && (
+    <p className="text-xs text-red-500 flex items-center gap-1">
+      <AlertCircle className="w-3 h-3" />
+      {errors.terms}
+    </p>
+  )}
+</div>
+
               {/* Submit Button */}
               <div className="pt-6 border-t">
                 <Button
@@ -1929,7 +1966,7 @@ const AstroRegister = () => {
                     Your registration token is:{" "}
                     <span className="font-mono font-semibold text-orange-700">{registrationCode}</span>
                   </p>
-                  <div className="flex justify-end">
+                  <div className="flex justify-end cursor-pointer">
                     <button
                       onClick={() => navigate("/")}
                       className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"

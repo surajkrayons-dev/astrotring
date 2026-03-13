@@ -591,6 +591,8 @@
 
 // export default UserLogin;
 // UserLogin.jsx
+
+
 import { useEffect, useState } from "react";
 import {
   Dialog,
@@ -608,7 +610,7 @@ import { z } from "zod";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin, userProfile, userRegister } from "@/redux/slice/UserAuth";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ForgotPassword from "./ForgotPasswordUser";
 import { fileToBase64 } from "@/hooks/fileToBase64";
 import { Camera, Upload, X } from "lucide-react";
@@ -646,6 +648,7 @@ const UserLogin = ({ ele }) => {
   const [mode, setMode] = useState("login");
   const [open, setOpen] = useState(false);
   const [userType, setUserType] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -737,17 +740,27 @@ const UserLogin = ({ ele }) => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    if (!termsAccepted) {
+    setErrors({ 
+      fields: { terms: ["You must accept the Terms & Conditions to sign up."] }, 
+      form: "" 
+    });
+    return;
+  }
     const parsed = signupSchema.safeParse(form);
 
     if (!parsed.success) {
       setErrors({ fields: parsed.error.flatten().fieldErrors, form: t("fixErrors") });
       return;
     }
+     
 
     const submitData = {
       ...parsed.data,
       password_confirmation: parsed.data.confirmPassword,
       profile_image: profileImage || null,
+       terms_accepted: termsAccepted ? 1 : 0, 
     };
 
     try {
@@ -834,8 +847,8 @@ const UserLogin = ({ ele }) => {
 
               {/* Profile Photo Upload */}
               <div className="space-y-1.5">
-                <Label className="text-sm flex items-center gap-1.5">
-                  <Camera className="w-3.5 h-3.5" /> {t("profilePhoto")}
+                <Label className="text-sm flex text-gray-800  items-center gap-1.5">
+                   {t("profilePhoto")}
                 </Label>
                 <div
                   onClick={() => document.getElementById('user-profile-upload')?.click()}
@@ -868,6 +881,45 @@ const UserLogin = ({ ele }) => {
 
               <Input type="password" name="password" placeholder={t("password")} onChange={handleChange} />
               <Input type="password" name="confirmPassword" placeholder={t("confirmPassword")} onChange={handleChange} />
+
+              {/* Terms & Conditions Checkbox */}
+<div className="space-y-1">
+  <div className="flex items-start gap-2">
+    <input
+      type="checkbox"
+      id="terms"
+      checked={termsAccepted}
+      onChange={(e) => setTermsAccepted(e.target.checked)}
+      className="mt-1 cursor-pointer"
+    />
+    <label htmlFor="terms" className="text-xs text-gray-600" style={{ fontSize: '12px',color: '#4b5563' }}>
+      I have read and agree to the{" "}
+      <Link
+        to="/terms-conditions"
+        target="_blank"
+        className="text-amber-600 hover:underline"
+       
+      >
+        Terms & Conditions
+      </Link>{" "}
+      and{" "}
+      <Link
+        to="/privacy-policy"
+        target="_blank"
+        className="text-amber-600 hover:underline"
+      >
+        Privacy Policy
+      </Link>
+      .
+    </label>
+  </div>
+  {errors.fields.terms && (
+    <p className="text-xs text-red-500 flex items-center gap-1">
+      <AlertCircle className="w-3 h-3" />
+      {errors.fields.terms}
+    </p>
+  )}
+</div>
 
               <Button className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg shadow-lg hover:shadow-xl transition-all" disabled={loading}>
                 {loading ? t("creating") : t("signUp")}

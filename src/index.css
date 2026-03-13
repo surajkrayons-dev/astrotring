@@ -266,7 +266,7 @@
   }
 
   p {
-    @apply lg:text-lg text-sm;
+    @apply lg:text-sm text-sm;
   }
 
   section {
@@ -284,9 +284,9 @@ h4 {
   font-family: "Montserrat", sans-serif;
 }
 label {
-  font-family: "Montserrat", sans-serif;
+  font-family:  sans-serif,"Montserrat",;
   font-size: 16px;
-  color: black !important;
+ 
 }
 
 h1 {

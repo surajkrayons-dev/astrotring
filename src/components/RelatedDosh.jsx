@@ -5,6 +5,8 @@ const RelatedDosh = () => {
   const { slug } = useParams();
 
   const filtered = servicesData.filter((item) => item.slug !== slug);
+  console.log("filtered",filtered)
+  
 
   return (
     <div
@@ -22,11 +24,11 @@ const RelatedDosh = () => {
           >
             <img
               src={item.img}
-              alt={item.title}
+              alt={item.slug}
               className="w-12 h-12 object-contain"
             />
             <span className="text-sm font-medium text-gray-800">
-              {item.title}
+              {item.slug}
             </span>
           </Link>
         ))}

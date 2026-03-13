@@ -337,7 +337,7 @@ const Faq = () => {
         <Accordion type="single" collapsible className="w-full" defaultValue="item-1">
           {faqData.map((faq) => (
             <AccordionItem key={faq.id} value={`item-${faq.id}`}>
-              <AccordionTrigger className="cursor-pointer font-normal text-lg">
+              <AccordionTrigger className="cursor-pointer font-semibold text-lg">
                 {t(faq.queKey)}
               </AccordionTrigger>
               <AccordionContent>{renderAnswer(faq.ansKey)}</AccordionContent>
